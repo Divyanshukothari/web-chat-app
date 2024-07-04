@@ -1,5 +1,12 @@
 import express from 'express'
 import authroutes from './routes/auth.route.js'
+import dotenv from 'dotenv'
+
+dotenv.config({
+    path:'./backend/.env'
+})
+
+const PORT = process.env.PORT || 7500
 
 const app = express()
 
@@ -11,10 +18,12 @@ app.get("/" , (req , res)=>{
 
 app.get("/hello", (req , res)=>{
     res.send("hello from server")
+    
 })
 
 app.use("/api/auth" , authroutes)
 
-app.listen(9000 , ()=>{
-     console.log("server is runnig in port 9000")
+app.listen(PORT , ()=>{
+     console.log(`server is runnign on PORT : ${PORT}`)
+     console.log(process.env.NAME)
 })
